@@ -20,21 +20,17 @@ public class MacFactura implements Serializable {
 	@Column(name="fac_id", unique=true, nullable=false)
 	private Integer facId;
 
-	@Column(name="fac_anticipo", nullable=false)
-	private double facAnticipo;
+	@Column(nullable=false)
+	private double anticipo;
 
-	@Column(name="fac_est", nullable=false)
-	private Boolean facEst;
+	@Column(nullable=false)
+	private Boolean est;
 
-	@Column(name="fac_estado", nullable=false, length=2147483647)
-	private String facEstado;
+	@Column(nullable=false, length=2147483647)
+	private String estado;
 
-	@Column(name="fac_total", nullable=false)
-	private Integer facTotal;
-
-	//bi-directional many-to-one association to MacDetFac
-	@OneToMany(mappedBy="macFactura")
-	private List<MacDetFac> macDetFacs;
+	@Column(nullable=false)
+	private Integer total;
 
 	//bi-directional many-to-one association to MacCliente
 	@ManyToOne
@@ -61,58 +57,36 @@ public class MacFactura implements Serializable {
 		this.facId = facId;
 	}
 
-	public double getFacAnticipo() {
-		return this.facAnticipo;
+	public double getAnticipo() {
+		return this.anticipo;
 	}
 
-	public void setFacAnticipo(double facAnticipo) {
-		this.facAnticipo = facAnticipo;
+	public void setAnticipo(double anticipo) {
+		this.anticipo = anticipo;
 	}
 
-	public Boolean getFacEst() {
-		return this.facEst;
+	public Boolean getEst() {
+		return this.est;
 	}
 
-	public void setFacEst(Boolean facEst) {
-		this.facEst = facEst;
+	public void setEst(Boolean est) {
+		this.est = est;
 	}
 
-	public String getFacEstado() {
-		return this.facEstado;
+	public String getEstado() {
+		return this.estado;
 	}
 
-	public void setFacEstado(String facEstado) {
-		this.facEstado = facEstado;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
-	public Integer getFacTotal() {
-		return this.facTotal;
+	public Integer getTotal() {
+		return this.total;
 	}
 
-	public void setFacTotal(Integer facTotal) {
-		this.facTotal = facTotal;
-	}
-
-	public List<MacDetFac> getMacDetFacs() {
-		return this.macDetFacs;
-	}
-
-	public void setMacDetFacs(List<MacDetFac> macDetFacs) {
-		this.macDetFacs = macDetFacs;
-	}
-
-	public MacDetFac addMacDetFac(MacDetFac macDetFac) {
-		getMacDetFacs().add(macDetFac);
-		macDetFac.setMacFactura(this);
-
-		return macDetFac;
-	}
-
-	public MacDetFac removeMacDetFac(MacDetFac macDetFac) {
-		getMacDetFacs().remove(macDetFac);
-		macDetFac.setMacFactura(null);
-
-		return macDetFac;
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 
 	public MacCliente getMacCliente() {

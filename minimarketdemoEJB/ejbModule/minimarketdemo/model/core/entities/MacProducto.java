@@ -20,24 +20,23 @@ public class MacProducto implements Serializable {
 	@Column(name="pro_id", unique=true, nullable=false)
 	private Integer proId;
 
-	@Column(name="pro_descripcion", nullable=false, length=2147483647)
-	private String proDescripcion;
+	@Column(nullable=false, length=2147483647)
+	private String descripcion;
 
-	@Column(name="pro_est", nullable=false)
-	private Boolean proEst;
+	@Column(nullable=false)
+	private Boolean est;
 
-	@Column(name="pro_nombre", nullable=false, length=2147483647)
-	private String proNombre;
+	@Column(nullable=false, length=2147483647)
+	private String estado;
 
-	@Column(name="pro_precioventa", nullable=false, length=2147483647)
-	private String proPrecioventa;
+	@Column(nullable=false, length=2147483647)
+	private String nombre;
 
-	@Column(name="pro_stock", nullable=false)
-	private Integer proStock;
+	@Column(nullable=false, length=2147483647)
+	private String precioventa;
 
-	//bi-directional many-to-one association to MacDetFac
-	@OneToMany(mappedBy="macProducto")
-	private List<MacDetFac> macDetFacs;
+	@Column(nullable=false)
+	private Integer stock;
 
 	//bi-directional many-to-one association to MacFabricacion
 	@OneToMany(mappedBy="macProducto")
@@ -54,66 +53,52 @@ public class MacProducto implements Serializable {
 		this.proId = proId;
 	}
 
-	public String getProDescripcion() {
-		return this.proDescripcion;
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
-	public void setProDescripcion(String proDescripcion) {
-		this.proDescripcion = proDescripcion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public Boolean getProEst() {
-		return this.proEst;
+	public Boolean getEst() {
+		return this.est;
 	}
 
-	public void setProEst(Boolean proEst) {
-		this.proEst = proEst;
+	public void setEst(Boolean est) {
+		this.est = est;
 	}
 
-	public String getProNombre() {
-		return this.proNombre;
+	public String getEstado() {
+		return this.estado;
 	}
 
-	public void setProNombre(String proNombre) {
-		this.proNombre = proNombre;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
-	public String getProPrecioventa() {
-		return this.proPrecioventa;
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public void setProPrecioventa(String proPrecioventa) {
-		this.proPrecioventa = proPrecioventa;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public Integer getProStock() {
-		return this.proStock;
+	public String getPrecioventa() {
+		return this.precioventa;
 	}
 
-	public void setProStock(Integer proStock) {
-		this.proStock = proStock;
+	public void setPrecioventa(String precioventa) {
+		this.precioventa = precioventa;
 	}
 
-	public List<MacDetFac> getMacDetFacs() {
-		return this.macDetFacs;
+	public Integer getStock() {
+		return this.stock;
 	}
 
-	public void setMacDetFacs(List<MacDetFac> macDetFacs) {
-		this.macDetFacs = macDetFacs;
-	}
-
-	public MacDetFac addMacDetFac(MacDetFac macDetFac) {
-		getMacDetFacs().add(macDetFac);
-		macDetFac.setMacProducto(this);
-
-		return macDetFac;
-	}
-
-	public MacDetFac removeMacDetFac(MacDetFac macDetFac) {
-		getMacDetFacs().remove(macDetFac);
-		macDetFac.setMacProducto(null);
-
-		return macDetFac;
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 
 	public List<MacFabricacion> getMacFabricacions() {

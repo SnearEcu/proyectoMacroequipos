@@ -20,26 +20,26 @@ public class MacFabricacion implements Serializable {
 	@Column(name="fab_id", unique=true, nullable=false)
 	private Integer fabId;
 
-	@Column(name="fab_calidad", nullable=false)
-	private Boolean fabCalidad;
+	@Column(nullable=false)
+	private Boolean calidad;
 
-	@Column(name="fab_cantidad", nullable=false)
-	private Integer fabCantidad;
+	@Column(nullable=false)
+	private Integer cantidad;
 
-	@Column(name="fab_est", nullable=false)
-	private Boolean fabEst;
+	@Column(nullable=false)
+	private Boolean est;
 
-	@Column(name="fab_estado", nullable=false, length=2147483647)
-	private String fabEstado;
-
-	//bi-directional many-to-one association to MacFabMat
-	@OneToMany(mappedBy="macFabricacion")
-	private List<MacFabMat> macFabMats;
+	@Column(nullable=false, length=2147483647)
+	private String estado;
 
 	//bi-directional many-to-one association to MacProducto
 	@ManyToOne
 	@JoinColumn(name="pro_id", nullable=false)
 	private MacProducto macProducto;
+
+	//bi-directional many-to-one association to MacFabricacionMaterial
+	@OneToMany(mappedBy="macFabricacion")
+	private List<MacFabricacionMaterial> macFabricacionMaterials;
 
 	public MacFabricacion() {
 	}
@@ -52,58 +52,36 @@ public class MacFabricacion implements Serializable {
 		this.fabId = fabId;
 	}
 
-	public Boolean getFabCalidad() {
-		return this.fabCalidad;
+	public Boolean getCalidad() {
+		return this.calidad;
 	}
 
-	public void setFabCalidad(Boolean fabCalidad) {
-		this.fabCalidad = fabCalidad;
+	public void setCalidad(Boolean calidad) {
+		this.calidad = calidad;
 	}
 
-	public Integer getFabCantidad() {
-		return this.fabCantidad;
+	public Integer getCantidad() {
+		return this.cantidad;
 	}
 
-	public void setFabCantidad(Integer fabCantidad) {
-		this.fabCantidad = fabCantidad;
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 
-	public Boolean getFabEst() {
-		return this.fabEst;
+	public Boolean getEst() {
+		return this.est;
 	}
 
-	public void setFabEst(Boolean fabEst) {
-		this.fabEst = fabEst;
+	public void setEst(Boolean est) {
+		this.est = est;
 	}
 
-	public String getFabEstado() {
-		return this.fabEstado;
+	public String getEstado() {
+		return this.estado;
 	}
 
-	public void setFabEstado(String fabEstado) {
-		this.fabEstado = fabEstado;
-	}
-
-	public List<MacFabMat> getMacFabMats() {
-		return this.macFabMats;
-	}
-
-	public void setMacFabMats(List<MacFabMat> macFabMats) {
-		this.macFabMats = macFabMats;
-	}
-
-	public MacFabMat addMacFabMat(MacFabMat macFabMat) {
-		getMacFabMats().add(macFabMat);
-		macFabMat.setMacFabricacion(this);
-
-		return macFabMat;
-	}
-
-	public MacFabMat removeMacFabMat(MacFabMat macFabMat) {
-		getMacFabMats().remove(macFabMat);
-		macFabMat.setMacFabricacion(null);
-
-		return macFabMat;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public MacProducto getMacProducto() {
@@ -112,6 +90,28 @@ public class MacFabricacion implements Serializable {
 
 	public void setMacProducto(MacProducto macProducto) {
 		this.macProducto = macProducto;
+	}
+
+	public List<MacFabricacionMaterial> getMacFabricacionMaterials() {
+		return this.macFabricacionMaterials;
+	}
+
+	public void setMacFabricacionMaterials(List<MacFabricacionMaterial> macFabricacionMaterials) {
+		this.macFabricacionMaterials = macFabricacionMaterials;
+	}
+
+	public MacFabricacionMaterial addMacFabricacionMaterial(MacFabricacionMaterial macFabricacionMaterial) {
+		getMacFabricacionMaterials().add(macFabricacionMaterial);
+		macFabricacionMaterial.setMacFabricacion(this);
+
+		return macFabricacionMaterial;
+	}
+
+	public MacFabricacionMaterial removeMacFabricacionMaterial(MacFabricacionMaterial macFabricacionMaterial) {
+		getMacFabricacionMaterials().remove(macFabricacionMaterial);
+		macFabricacionMaterial.setMacFabricacion(null);
+
+		return macFabricacionMaterial;
 	}
 
 }
