@@ -46,28 +46,6 @@
 		</h:form>
 		<br />
 
-		<h:form>
-			<p:panel header="Stock" style="width:75%; margin: 0 auto "
-				toggleable="true" collapsed="true" closable="false"
-				toggleSpeed="500" closeSpeed="500">
-				<p:panelGrid columns="2" style="width:75%; margin: 0 auto ">
-
-					<h:outputText value="Materiales" />
-					<p:selectOneMenu filterMatchMode="contains" filter="true" >
-						<f:selectItem itemLabel="Seleccione un material"
-							noSelectionOption="true" />
-<!-- 						<f:selectItems value="#{beanSegAsignaciones.listaUsuarios}" -->
-<!-- 							var="u" itemLabel="#{u.apellidos} #{u.nombres}" -->
-<!-- 							itemValue="#{u.idSegUsuario}"></f:selectItems> -->
-<!-- 						<p:ajax update="tablaAsignaciones" -->
-<!-- 							listener="#{beanSegAsignaciones.actionListenerSeleccionarUsuario()}"></p:ajax> -->
-					</p:selectOneMenu>
-					<h:outputText value="Cantidad" />
-					<p:spinner min="0" max="10000" />
-					<p:commandButton icon="pi pi-save" update="@form,:formTabla" />
-				</p:panelGrid>
-			</p:panel>
-		</h:form>
 	<br />
 	
 		<h:form id="formTabla">
