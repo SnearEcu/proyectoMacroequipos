@@ -6,4 +6,3 @@ Se tiene las siguientes características:
 - Wildfly
 - Postgresql
 
-holauajsbodbasd
