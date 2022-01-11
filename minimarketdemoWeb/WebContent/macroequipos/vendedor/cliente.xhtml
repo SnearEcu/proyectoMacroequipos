@@ -25,44 +25,50 @@
 				</p:menuButton>
 			</f:facet>
 		</p:menubar>
-		<p:staticMessage severity="info" summary="Tareas de:"></p:staticMessage>
-		<h:outputText value=" #{beanPryLider.proyectoSeleccionado.nombre}" />
+		<p:staticMessage severity="info" summary="CLIENTE:"></p:staticMessage>
+		<h:outputText value="" />
 	</h:form>
 	<div>
 	<h:form>
 		<p:panelGrid columns="2">
 			
-			<h:outputText value="HOLA" />
-			<p:inputText value="#{beanAutVendedor.nuevaSolicitud.cliente}" required="true" requiredMessage="Debe poner un nombre"/> 
 			
-				
-			<h:outputText value="Prenda" />
-				<p:selectOneMenu value="#{beanAutVendedor.productoSeleccionado}">
-					<f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
-					<f:selectItems value="#{beanAutVendedor.listaProductos}" var="p" 
-					itemLabel="#{p.nombre}" itemValue="#{p.proId}"/>
-				</p:selectOneMenu>
-			<h:outputText value="Fecha de entrega:" />
-			<p:calendar value="#{beanAutVendedor.nuevaSolicitud.fechainicio}"/>
-			<p:commandButton  icon="pi pi-save" update="@form,:formTabla"
-			actionListener="#{beanAutVendedor.actionListenerInsertarPedido()}"/>
+			<h:outputText value="Apellido" />
+			<p:inputText required="true" requiredMessage="Debe poner Apellido"/> 
+			<h:outputText value=" Nombre" />
+			<p:inputText required="true" requiredMessage="Debe poner un Nombre"/> 
+			<h:outputText value=" Dirección" />
+			<p:inputText required="true" requiredMessage="Debe poner un Direccion"/> 
+			<h:outputText value="Ciudad" />
+			<p:inputText required="true" requiredMessage="Debe poner ciudad"/> 
+			<h:outputText value="Teléfono" />
+			<p:inputText required="true" requiredMessage="Debe poner un Telefono"/> 
+	
+	<p:commandButton value="Guardar"	></p:commandButton>		
+			
 		</p:panelGrid>
 	</h:form>
 	<h:form id="formTabla">
-
-		<p:dataTable value="#{beanAutVendedor.listaPedidos}" var="p">
+	<p:dataTable>
 			<p:column headerText="ID" style="width:40px">
-				<h:outputText value="#{p.pedId}"/>
+				<h:outputText/>
 			</p:column>
-			<p:column headerText="Producto">
-							<h:outputText  value="#{p.autProducto.nombre}"/>
+				<p:column headerText="Apellido" >
+				<h:outputText />
+			</p:column>
+				<p:column headerText="Nombre" >
+				<h:outputText />
+			</p:column>
+				<p:column headerText="Dirección" >
+				<h:outputText />
+			</p:column>
+				<p:column headerText="Ciudad" >
+				<h:outputText />
+			</p:column>
+			<p:column headerText="Estado" >
+				<h:outputText/>
+			</p:column>
 			
-			</p:column>
-			<p:column headerText="Precio">
-							<h:outputText  value="#{p.autProducto.costo}"/>
-			
-			</p:column>
-
 
 						<p:column headerText="OPCIONES">
 							<p:commandButton title="Editar" icon="pi pi-pencil" style="margin: 10px"/>
