@@ -20,23 +20,26 @@ public class MacCliente implements Serializable {
 	@Column(name="cli_id", unique=true, nullable=false)
 	private Integer cliId;
 
-	@Column(name="cli_apellido", nullable=false, length=2147483647)
-	private String cliApellido;
+	@Column(nullable=false, length=2147483647)
+	private String apellido;
 
-	@Column(name="cli_ciudad", nullable=false, length=2147483647)
-	private String cliCiudad;
+	@Column(nullable=false, length=2147483647)
+	private String cedula;
 
-	@Column(name="cli_direccion", nullable=false, length=2147483647)
-	private String cliDireccion;
+	@Column(nullable=false, length=2147483647)
+	private String ciudad;
 
-	@Column(name="cli_est", nullable=false)
-	private Boolean cliEst;
+	@Column(nullable=false, length=2147483647)
+	private String direccion;
 
-	@Column(name="cli_nombre", nullable=false, length=2147483647)
-	private String cliNombre;
+	@Column(nullable=false)
+	private Boolean est;
 
-	@Column(name="cli_telefono", nullable=false, length=2147483647)
-	private String cliTelefono;
+	@Column(nullable=false, length=2147483647)
+	private String nombre;
+
+	@Column(nullable=false, length=2147483647)
+	private String telefono;
 
 	//bi-directional many-to-one association to MacFactura
 	@OneToMany(mappedBy="macCliente")
@@ -53,52 +56,60 @@ public class MacCliente implements Serializable {
 		this.cliId = cliId;
 	}
 
-	public String getCliApellido() {
-		return this.cliApellido;
+	public String getApellido() {
+		return this.apellido;
 	}
 
-	public void setCliApellido(String cliApellido) {
-		this.cliApellido = cliApellido;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
-	public String getCliCiudad() {
-		return this.cliCiudad;
+	public String getCedula() {
+		return this.cedula;
 	}
 
-	public void setCliCiudad(String cliCiudad) {
-		this.cliCiudad = cliCiudad;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
-	public String getCliDireccion() {
-		return this.cliDireccion;
+	public String getCiudad() {
+		return this.ciudad;
 	}
 
-	public void setCliDireccion(String cliDireccion) {
-		this.cliDireccion = cliDireccion;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
-	public Boolean getCliEst() {
-		return this.cliEst;
+	public String getDireccion() {
+		return this.direccion;
 	}
 
-	public void setCliEst(Boolean cliEst) {
-		this.cliEst = cliEst;
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
-	public String getCliNombre() {
-		return this.cliNombre;
+	public Boolean getEst() {
+		return this.est;
 	}
 
-	public void setCliNombre(String cliNombre) {
-		this.cliNombre = cliNombre;
+	public void setEst(Boolean est) {
+		this.est = est;
 	}
 
-	public String getCliTelefono() {
-		return this.cliTelefono;
+	public String getNombre() {
+		return this.nombre;
 	}
 
-	public void setCliTelefono(String cliTelefono) {
-		this.cliTelefono = cliTelefono;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public List<MacFactura> getMacFacturas() {

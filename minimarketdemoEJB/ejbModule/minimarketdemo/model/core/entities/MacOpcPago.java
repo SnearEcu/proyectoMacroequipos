@@ -20,8 +20,8 @@ public class MacOpcPago implements Serializable {
 	@Column(name="opc_pago_id", unique=true, nullable=false)
 	private Integer opcPagoId;
 
-	@Column(name="opc_tipo", nullable=false, length=2147483647)
-	private String opcTipo;
+	@Column(nullable=false, length=2147483647)
+	private String tipo;
 
 	//bi-directional many-to-one association to MacFactura
 	@OneToMany(mappedBy="macOpcPago")
@@ -38,12 +38,12 @@ public class MacOpcPago implements Serializable {
 		this.opcPagoId = opcPagoId;
 	}
 
-	public String getOpcTipo() {
-		return this.opcTipo;
+	public String getTipo() {
+		return this.tipo;
 	}
 
-	public void setOpcTipo(String opcTipo) {
-		this.opcTipo = opcTipo;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public List<MacFactura> getMacFacturas() {

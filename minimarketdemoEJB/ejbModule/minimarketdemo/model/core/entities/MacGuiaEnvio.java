@@ -19,23 +19,23 @@ public class MacGuiaEnvio implements Serializable {
 	@Column(name="gui_id", unique=true, nullable=false)
 	private Integer guiId;
 
-	@Column(name="gui_descripcion", nullable=false, length=2147483647)
-	private String guiDescripcion;
+	@Column(nullable=false, length=2147483647)
+	private String descripcion;
+
+	@Column(nullable=false)
+	private Boolean est;
+
+	@Column(nullable=false, length=2147483647)
+	private String estado;
+
+	@Column(nullable=false, length=2147483647)
+	private String fechaentrega;
+
+	@Column(nullable=false, length=2147483647)
+	private String fechasalida;
 
 	@Column(name="gui_destino", nullable=false, length=2147483647)
 	private String guiDestino;
-
-	@Column(name="gui_est", nullable=false)
-	private Boolean guiEst;
-
-	@Column(name="gui_estado", nullable=false, length=2147483647)
-	private String guiEstado;
-
-	@Column(name="gui_fechaentrega", nullable=false, length=2147483647)
-	private String guiFechaentrega;
-
-	@Column(name="gui_fechasalida", nullable=false, length=2147483647)
-	private String guiFechasalida;
 
 	//bi-directional many-to-one association to MacFactura
 	@ManyToOne
@@ -53,12 +53,44 @@ public class MacGuiaEnvio implements Serializable {
 		this.guiId = guiId;
 	}
 
-	public String getGuiDescripcion() {
-		return this.guiDescripcion;
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
-	public void setGuiDescripcion(String guiDescripcion) {
-		this.guiDescripcion = guiDescripcion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Boolean getEst() {
+		return this.est;
+	}
+
+	public void setEst(Boolean est) {
+		this.est = est;
+	}
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getFechaentrega() {
+		return this.fechaentrega;
+	}
+
+	public void setFechaentrega(String fechaentrega) {
+		this.fechaentrega = fechaentrega;
+	}
+
+	public String getFechasalida() {
+		return this.fechasalida;
+	}
+
+	public void setFechasalida(String fechasalida) {
+		this.fechasalida = fechasalida;
 	}
 
 	public String getGuiDestino() {
@@ -67,38 +99,6 @@ public class MacGuiaEnvio implements Serializable {
 
 	public void setGuiDestino(String guiDestino) {
 		this.guiDestino = guiDestino;
-	}
-
-	public Boolean getGuiEst() {
-		return this.guiEst;
-	}
-
-	public void setGuiEst(Boolean guiEst) {
-		this.guiEst = guiEst;
-	}
-
-	public String getGuiEstado() {
-		return this.guiEstado;
-	}
-
-	public void setGuiEstado(String guiEstado) {
-		this.guiEstado = guiEstado;
-	}
-
-	public String getGuiFechaentrega() {
-		return this.guiFechaentrega;
-	}
-
-	public void setGuiFechaentrega(String guiFechaentrega) {
-		this.guiFechaentrega = guiFechaentrega;
-	}
-
-	public String getGuiFechasalida() {
-		return this.guiFechasalida;
-	}
-
-	public void setGuiFechasalida(String guiFechasalida) {
-		this.guiFechasalida = guiFechasalida;
 	}
 
 	public MacFactura getMacFactura() {
