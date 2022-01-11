@@ -11,6 +11,7 @@
 <body>
 	<h:form>
 		<p:menubar>
+		<p:menuitem value="Regresar" icon="pi pi-home" action="/menu" />
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">
@@ -28,7 +29,7 @@
 				<p:staticMessage severity="info" summary="INVENTARIO"
 					style="width: 100%" />
 				<p:dataViewGridItem> 
-					<p:commandLink action="#{beanSegLogin.actionMenu(ordeños/gerente/pedido)}">
+					<p:commandLink action="productos">
 						<p:panelGrid columns="1" style="margin-top:5px">
 										<h:outputText value="Productos" />
 										<i class="pi pi-th-large"  style="font-size: 2rem"></i>
