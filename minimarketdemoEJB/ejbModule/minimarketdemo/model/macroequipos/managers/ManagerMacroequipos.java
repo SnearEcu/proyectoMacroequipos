@@ -8,6 +8,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import minimarketdemo.model.core.entities.MacMaterial;
+import minimarketdemo.model.core.entities.PryProyecto;
 import minimarketdemo.model.core.managers.ManagerDAO;
 import minimarketdemo.model.core.utils.ModelUtil;
 
@@ -37,6 +38,9 @@ public class ManagerMacroequipos {
 	
 	public void insertarMaterial (MacMaterial nuevoMaterial) throws Exception {
     	mDAO.insertar(nuevoMaterial);
+    }
+	public void actualizarMaterial(MacMaterial material) throws Exception {
+    	mDAO.actualizar(material);
     }
 	/*
 	//Funciones de vendedor

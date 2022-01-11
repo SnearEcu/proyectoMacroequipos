@@ -35,18 +35,19 @@
 				
 				<p:panelGrid columns="2" style="width:75%; margin: 0 auto " >
 					<h:outputText value="Nombre" />
-					<p:inputText required="true"
-						requiredMessage="Debe ingresar el nombre" />
+					<p:inputText value="#{beanMacGerente.nuevoMaterial.nombre}" 
+					required="true" requiredMessage="Debe ingresar el nombre" />
 					<h:outputText value="Descripcion" />
-					<p:inputText required="true" requiredMessage="" />
+					<p:inputText value="#{beanMacGerente.nuevoMaterial.descripcion}" 
+					 required="false" requiredMessage="" />
 					<p:commandButton value="Ingresar material" icon="pi pi-inbox"
-						update="@form,:formTabla" />
+					 actionListener="#{beanMacGerente.actionListenerInsertarMaterial()}"	update="@form,:formTabla,:stock" />
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
 		<br />
 
-		<h:form>
+		<h:form id="stock">
 			<p:panel header="Stock" style="width:75%; margin: 0 auto "
 				toggleable="true" collapsed="true" closable="false"
 				toggleSpeed="500" closeSpeed="500">
@@ -56,11 +57,11 @@
 					<p:selectOneMenu filterMatchMode="contains" filter="true" >
 						<f:selectItem itemLabel="Seleccione un material"
 							noSelectionOption="true" />
-<!-- 						<f:selectItems value="#{beanSegAsignaciones.listaUsuarios}" -->
-<!-- 							var="u" itemLabel="#{u.apellidos} #{u.nombres}" -->
-<!-- 							itemValue="#{u.idSegUsuario}"></f:selectItems> -->
-<!-- 						<p:ajax update="tablaAsignaciones" -->
-<!-- 							listener="#{beanSegAsignaciones.actionListenerSeleccionarUsuario()}"></p:ajax> -->
+						<f:selectItems value="#{beanMacGerente.listaMateriales}" 
+ 							var="u" itemLabel="#{u.nombre}" 
+							itemValue="#{u.matId}"></f:selectItems> 
+<!--  						<p:ajax update="formTabla" -->
+<!-- 							listener="#{beanSegAsignaciones.actionListenerSeleccionarUsuario()}"></p:ajax>  -->
 					</p:selectOneMenu>
 					<h:outputText value="Cantidad" />
 					<p:spinner min="0" max="10000" />
@@ -72,20 +73,20 @@
 	
 		<h:form id="formTabla">
 
-			<p:dataTable>
+			<p:dataTable value="#{beanMacGerente.listaMateriales}" var="p">
 				<p:column headerText="ID" style="width:40px">
-					<h:outputText />
+					<h:outputText value="#{p.matId}"/>
 				</p:column>
 				<p:column headerText="Nombre">
-					<h:outputText />
+					<h:outputText value="#{p.nombre}"/>
 
 				</p:column>
 				<p:column headerText="Cantidad">
-					<h:outputText />
+					<h:outputText value="#{p.stock}"/>
 
 				</p:column>
 				<p:column headerText="Descripcion">
-					<h:outputText />
+					<h:outputText value="#{p.descripcion}"/>
 
 				</p:column>
 				<p:column headerText="OPCIONES">
