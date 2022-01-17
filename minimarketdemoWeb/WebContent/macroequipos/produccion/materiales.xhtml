@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<f:metadata>
+	<f:event listener="#{beanSegLogin.actionVerificarLogin()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+<h:head></h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<div>
+		
+		<br />
+
+		
+	<br />
+	
+		<h:form id="formTabla">
+
+			<p:dataTable value="#{beanMacGerente.listaMateriales}" var="p">
+				<p:column headerText="ID" style="width:40px">
+					<h:outputText value="#{p.matId}"/>
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{p.nombre}"/>
+
+				</p:column>
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{p.stock}"/>
+
+				</p:column>
+				<p:column headerText="Descripcion">
+					<h:outputText value="#{p.descripcion}"/>
+
+				</p:column>
+				<p:column headerText="OPCIONES">
+					<p:commandButton title="Editar" icon="pi pi-pencil"
+						style="margin: 10px" />
+					<p:commandButton title="Eliminar" icon="pi pi-times" />
+
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</div>
+</body>
+</html>
