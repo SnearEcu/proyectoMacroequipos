@@ -1,0 +1,274 @@
+
+CREATE SEQUENCE public.mac_material_mat_id_seq;
+
+CREATE TABLE public.mac_material (
+                mat_id INTEGER NOT NULL DEFAULT nextval('public.mac_material_mat_id_seq'),
+                nombre VARCHAR NOT NULL,
+                stock DOUBLE PRECISION NOT NULL,
+                descripcion VARCHAR,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_material_pk PRIMARY KEY (mat_id)
+);
+
+
+ALTER SEQUENCE public.mac_material_mat_id_seq OWNED BY public.mac_material.mat_id;
+
+CREATE UNIQUE INDEX mac_material_idx
+ ON public.mac_material
+ ( nombre );
+
+CREATE SEQUENCE public.mac_opc_pago_opc_pago_id_seq;
+
+CREATE TABLE public.mac_opc_pago (
+                opc_pago_id INTEGER NOT NULL DEFAULT nextval('public.mac_opc_pago_opc_pago_id_seq'),
+                tipo VARCHAR NOT NULL,
+                CONSTRAINT mac_opc_pago_pk PRIMARY KEY (opc_pago_id)
+);
+
+
+ALTER SEQUENCE public.mac_opc_pago_opc_pago_id_seq OWNED BY public.mac_opc_pago.opc_pago_id;
+
+CREATE SEQUENCE public.mac_cliente_cli_id_seq;
+
+CREATE TABLE public.mac_cliente (
+                cli_id INTEGER NOT NULL DEFAULT nextval('public.mac_cliente_cli_id_seq'),
+                cedula VARCHAR NOT NULL,
+                apellido VARCHAR NOT NULL,
+                nombre VARCHAR NOT NULL,
+                direccion VARCHAR NOT NULL,
+                ciudad VARCHAR NOT NULL,
+                telefono VARCHAR NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_cliente_pk PRIMARY KEY (cli_id)
+);
+
+
+ALTER SEQUENCE public.mac_cliente_cli_id_seq OWNED BY public.mac_cliente.cli_id;
+
+CREATE UNIQUE INDEX mac_cliente_idx
+ ON public.mac_cliente
+ ( cedula, telefono );
+
+CREATE SEQUENCE public.mac_orden_produccion_ord_id_seq;
+
+CREATE TABLE public.mac_orden_produccion (
+                ord_id VARCHAR NOT NULL DEFAULT nextval('public.mac_orden_produccion_ord_id_seq'),
+                fechaInicio DATE,
+                descripcion VARCHAR,
+                est VARCHAR NOT NULL,
+                fechaFinal DATE,
+                CONSTRAINT mac_orden_produccion_pk PRIMARY KEY (ord_id)
+);
+
+
+ALTER SEQUENCE public.mac_orden_produccion_ord_id_seq OWNED BY public.mac_orden_produccion.ord_id;
+
+CREATE SEQUENCE public.mac_fabricacion_fab_id_seq;
+
+CREATE TABLE public.mac_fabricacion (
+                fab_id INTEGER NOT NULL DEFAULT nextval('public.mac_fabricacion_fab_id_seq'),
+                ord_id VARCHAR NOT NULL,
+                calidad BOOLEAN NOT NULL,
+                estado VARCHAR NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_fabricacion_pk PRIMARY KEY (fab_id)
+);
+
+
+ALTER SEQUENCE public.mac_fabricacion_fab_id_seq OWNED BY public.mac_fabricacion.fab_id;
+
+CREATE SEQUENCE public.mac_fabricacion_material_fab_mat_id_seq;
+
+CREATE TABLE public.mac_fabricacion_material (
+                fab_mat_id INTEGER NOT NULL DEFAULT nextval('public.mac_fabricacion_material_fab_mat_id_seq'),
+                fab_id INTEGER NOT NULL,
+                mat_id INTEGER NOT NULL,
+                cantidad INTEGER NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_fabricacion_material_pk PRIMARY KEY (fab_mat_id)
+);
+
+
+ALTER SEQUENCE public.mac_fabricacion_material_fab_mat_id_seq OWNED BY public.mac_fabricacion_material.fab_mat_id;
+
+CREATE SEQUENCE public.mac_producto_pro_id_seq;
+
+CREATE TABLE public.mac_producto (
+                pro_id INTEGER NOT NULL DEFAULT nextval('public.mac_producto_pro_id_seq'),
+                nombre VARCHAR NOT NULL,
+                precioventa DOUBLE PRECISION NOT NULL,
+                stock INTEGER NOT NULL,
+                descripcion VARCHAR NOT NULL,
+                estado VARCHAR NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_producto_pk PRIMARY KEY (pro_id)
+);
+
+
+ALTER SEQUENCE public.mac_producto_pro_id_seq OWNED BY public.mac_producto.pro_id;
+
+CREATE INDEX mac_producto_idx
+ ON public.mac_producto
+ ( nombre );
+
+CREATE UNIQUE INDEX mac_producto_idx1
+ ON public.mac_producto
+ ( nombre );
+
+CREATE SEQUENCE public.mac_abastecimiento_aba_id_seq;
+
+CREATE TABLE public.mac_abastecimiento (
+                aba_id INTEGER NOT NULL DEFAULT nextval('public.mac_abastecimiento_aba_id_seq'),
+                ord_id VARCHAR NOT NULL,
+                pro_id INTEGER NOT NULL,
+                cantidad INTEGER NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_abastecimiento_pk PRIMARY KEY (aba_id)
+);
+
+
+ALTER SEQUENCE public.mac_abastecimiento_aba_id_seq OWNED BY public.mac_abastecimiento.aba_id;
+
+CREATE SEQUENCE public.mac_factura_fac_id_seq;
+
+CREATE TABLE public.mac_factura (
+                fac_id INTEGER NOT NULL DEFAULT nextval('public.mac_factura_fac_id_seq'),
+                cli_id INTEGER NOT NULL,
+                opc_pago_id INTEGER NOT NULL,
+                anticipo DOUBLE PRECISION NOT NULL,
+                estado VARCHAR NOT NULL,
+                total INTEGER NOT NULL,
+                fecha DATE NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_factura_pk PRIMARY KEY (fac_id)
+);
+
+
+ALTER SEQUENCE public.mac_factura_fac_id_seq OWNED BY public.mac_factura.fac_id;
+
+CREATE SEQUENCE public.mac_guia_envio_gui_id_seq;
+
+CREATE TABLE public.mac_guia_envio (
+                gui_id INTEGER NOT NULL DEFAULT nextval('public.mac_guia_envio_gui_id_seq'),
+                fac_id INTEGER NOT NULL,
+                gui_destino VARCHAR NOT NULL,
+                fechaSalida VARCHAR NOT NULL,
+                fechaEntrega VARCHAR NOT NULL,
+                descripcion VARCHAR NOT NULL,
+                estado VARCHAR NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_guia_envio_pk PRIMARY KEY (gui_id)
+);
+
+
+ALTER SEQUENCE public.mac_guia_envio_gui_id_seq OWNED BY public.mac_guia_envio.gui_id;
+
+CREATE SEQUENCE public.mac_detalle_factura_det_fac_id_seq;
+
+CREATE TABLE public.mac_detalle_factura (
+                det_fac_id INTEGER NOT NULL DEFAULT nextval('public.mac_detalle_factura_det_fac_id_seq'),
+                fac_id INTEGER NOT NULL,
+                pro_id INTEGER NOT NULL,
+                cantidad INTEGER NOT NULL,
+                est BOOLEAN NOT NULL,
+                CONSTRAINT mac_detalle_factura_pk PRIMARY KEY (det_fac_id)
+);
+
+
+ALTER SEQUENCE public.mac_detalle_factura_det_fac_id_seq OWNED BY public.mac_detalle_factura.det_fac_id;
+
+CREATE SEQUENCE public.mac_peticiones_pet_id_seq;
+
+CREATE TABLE public.mac_peticiones (
+                pet_id INTEGER NOT NULL DEFAULT nextval('public.mac_peticiones_pet_id_seq'),
+                det_fac_id INTEGER NOT NULL,
+                ord_id VARCHAR NOT NULL,
+                CONSTRAINT mac_peticiones_pk PRIMARY KEY (pet_id)
+);
+
+
+ALTER SEQUENCE public.mac_peticiones_pet_id_seq OWNED BY public.mac_peticiones.pet_id;
+
+ALTER TABLE public.mac_fabricacion_material ADD CONSTRAINT materiales_fab_mat_fk
+FOREIGN KEY (mat_id)
+REFERENCES public.mac_material (mat_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_factura ADD CONSTRAINT opc_pago_factura_fk
+FOREIGN KEY (opc_pago_id)
+REFERENCES public.mac_opc_pago (opc_pago_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_factura ADD CONSTRAINT cliente_factura_fk
+FOREIGN KEY (cli_id)
+REFERENCES public.mac_cliente (cli_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_peticiones ADD CONSTRAINT mac_orden_produccion_mac_peticiones_fk
+FOREIGN KEY (ord_id)
+REFERENCES public.mac_orden_produccion (ord_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_fabricacion ADD CONSTRAINT mac_orden_produccion_mac_fabricacion_fk
+FOREIGN KEY (ord_id)
+REFERENCES public.mac_orden_produccion (ord_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_abastecimiento ADD CONSTRAINT mac_orden_produccion_mac_abastecimiento_fk
+FOREIGN KEY (ord_id)
+REFERENCES public.mac_orden_produccion (ord_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_fabricacion_material ADD CONSTRAINT fabricacion_fab_mat_fk
+FOREIGN KEY (fab_id)
+REFERENCES public.mac_fabricacion (fab_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_detalle_factura ADD CONSTRAINT producto_det_fac_fk
+FOREIGN KEY (pro_id)
+REFERENCES public.mac_producto (pro_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_abastecimiento ADD CONSTRAINT mac_producto_abastecimiento_fk
+FOREIGN KEY (pro_id)
+REFERENCES public.mac_producto (pro_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_detalle_factura ADD CONSTRAINT factura_det_fac_fk
+FOREIGN KEY (fac_id)
+REFERENCES public.mac_factura (fac_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_guia_envio ADD CONSTRAINT factura_guia_envio_fk
+FOREIGN KEY (fac_id)
+REFERENCES public.mac_factura (fac_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.mac_peticiones ADD CONSTRAINT mac_detalle_factura_mac_peticiones_fk
+FOREIGN KEY (det_fac_id)
+REFERENCES public.mac_detalle_factura (det_fac_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;

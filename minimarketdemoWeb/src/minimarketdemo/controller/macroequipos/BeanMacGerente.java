@@ -29,34 +29,60 @@ public class BeanMacGerente implements Serializable {
 	private List<MacMaterial> listaMateriales;
 	private MacMaterial edicionMaterial;
 	private MacMaterial nuevoMaterial;
-//	private List<AutProducto> listaProductos;
-//	private List<AutPedido> listaPedidos;
-//	private AutSolicitud nuevaSolicitud;
-//	private AutPedido nuevoPedido;
-//	private int productoSeleccionado;
-//	private int solicitudSeleccionada;
-//	private String[] estado = {"Solicitado","Aprobado"};
-//	
-	
+	private int idseleccionado = 0;
+	boolean redflag = false;
+
 	public BeanMacGerente() {
 		// TODO Auto-generated constructor stub
 	}
+
 	@Inject
 	private BeanSegLogin beanSegLogin;
-	
-	
-	//Metodos para el vendedor
-		//Solicitues
-	
+
+	// Metodos para el vendedor
+	// Solicitues
+
 	@PostConstruct
 	public void inicializar() {
 		listaMateriales = mMacro.findAllMacMaterials();
 		nuevoMaterial = mMacro.inicializarMaterial();
 	}
+
 	public void actionListenerInsertarMaterial() {
+		System.out.println("1 " + redflag);
 		try {
-			mMacro.insertarMaterial(nuevoMaterial);
-			JSFUtil.crearMensajeINFO("Material creado");
+			System.out.println("2 " + redflag);
+			for (int i = 0; i < listaMateriales.size(); i++) {
+				System.out.println("3 " + redflag);
+				String nombre = listaMateriales.get(i).getNombre();
+				System.out.println("4 " + redflag);
+				if (nuevoMaterial.getNombre().equals(nombre)) {
+					System.out.println("5 " + nuevoMaterial.getNombre() + " " + nombre +i);
+					redflag = false;
+				}else {
+					redflag = true;
+					System.out.println("6 " + redflag);
+				}
+				System.out.println("7 " + redflag);
+			}
+			System.out.println("8 " + redflag);
+			if (redflag == true) {
+				mMacro.insertarMaterial(nuevoMaterial);
+				JSFUtil.crearMensajeINFO("Material creado");
+				listaMateriales = mMacro.findAllMacMaterials();
+				nuevoMaterial = mMacro.inicializarMaterial();
+				} else {
+					JSFUtil.crearMensajeWARN("Este material ya existe");
+				}
+		} catch (Exception e) {
+			JSFUtil.crearMensajeERROR(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public void actionListenerActualizarStockAumentar() {
+		try {
+			mMacro.actualizarStockAumentar(beanSegLogin.getLoginDTO(),edicionMaterial);
 			listaMateriales = mMacro.findAllMacMaterials();
 			nuevoMaterial = mMacro.inicializarMaterial();
 		} catch (Exception e) {
@@ -64,16 +90,21 @@ public class BeanMacGerente implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	public void actionListenerActualizarEstado(MacMaterial material) {
+	public void actionListenerActualizarStockDisminuir() {
 		try {
-			mMacro.insertarMaterial(material);
-			JSFUtil.crearMensajeINFO("Estado actualizado");
+			mMacro.actualizarStockDisminuir(beanSegLogin.getLoginDTO(),edicionMaterial);
+			listaMateriales = mMacro.findAllMacMaterials();
+			nuevoMaterial = mMacro.inicializarMaterial();
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void actionListenerSeleccionarMaterial() throws Exception {
+		edicionMaterial = mMacro.findByIdMacMaterials(idseleccionado);
+	}
+
 //	public String actionPedido() {
 //		nuevoPedido = mAutomoviles.inicializarPedido();
 //		listaProductos = mAutomoviles.findAllProductos();
@@ -92,7 +123,7 @@ public class BeanMacGerente implements Serializable {
 //			e.printStackTrace();
 //		}
 //	}
-	
+
 	public List<MacMaterial> getListaMateriales() {
 		return listaMateriales;
 	}
@@ -101,25 +132,28 @@ public class BeanMacGerente implements Serializable {
 		this.listaMateriales = listaMateriales;
 	}
 
-
-
 	public MacMaterial getEdicionMaterial() {
 		return edicionMaterial;
 	}
 
+	public int getIdseleccionado() {
+		return idseleccionado;
+	}
 
+	public void setIdseleccionado(int idseleccionado) {
+		this.idseleccionado = idseleccionado;
+	}
 
 	public void setEdicionMaterial(MacMaterial edicionMaterial) {
 		this.edicionMaterial = edicionMaterial;
 	}
+
 	public MacMaterial getNuevoMaterial() {
 		return nuevoMaterial;
 	}
+
 	public void setNuevoMaterial(MacMaterial nuevoMaterial) {
 		this.nuevoMaterial = nuevoMaterial;
 	}
-	
 
-	
-	
 }

@@ -31,6 +31,8 @@ public class ManagerSeguridades {
 	private ManagerDAO mDAO;
 	@EJB
 	private ManagerAuditoria mAuditoria;
+	
+	
     /**
      * Default constructor. 
      */
