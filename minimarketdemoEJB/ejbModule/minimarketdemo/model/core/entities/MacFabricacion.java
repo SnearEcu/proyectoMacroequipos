@@ -24,18 +24,15 @@ public class MacFabricacion implements Serializable {
 	private Boolean calidad;
 
 	@Column(nullable=false)
-	private Integer cantidad;
-
-	@Column(nullable=false)
 	private Boolean est;
 
 	@Column(nullable=false, length=2147483647)
 	private String estado;
 
-	//bi-directional many-to-one association to MacProducto
+	//bi-directional many-to-one association to MacOrdenProduccion
 	@ManyToOne
-	@JoinColumn(name="pro_id", nullable=false)
-	private MacProducto macProducto;
+	@JoinColumn(name="ord_id", nullable=false)
+	private MacOrdenProduccion macOrdenProduccion;
 
 	//bi-directional many-to-one association to MacFabricacionMaterial
 	@OneToMany(mappedBy="macFabricacion")
@@ -60,14 +57,6 @@ public class MacFabricacion implements Serializable {
 		this.calidad = calidad;
 	}
 
-	public Integer getCantidad() {
-		return this.cantidad;
-	}
-
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
 	public Boolean getEst() {
 		return this.est;
 	}
@@ -84,12 +73,12 @@ public class MacFabricacion implements Serializable {
 		this.estado = estado;
 	}
 
-	public MacProducto getMacProducto() {
-		return this.macProducto;
+	public MacOrdenProduccion getMacOrdenProduccion() {
+		return this.macOrdenProduccion;
 	}
 
-	public void setMacProducto(MacProducto macProducto) {
-		this.macProducto = macProducto;
+	public void setMacOrdenProduccion(MacOrdenProduccion macOrdenProduccion) {
+		this.macOrdenProduccion = macOrdenProduccion;
 	}
 
 	public List<MacFabricacionMaterial> getMacFabricacionMaterials() {

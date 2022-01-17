@@ -23,11 +23,17 @@
 		<class>minimarketdemo.model.core.entities.AutPedido</class>
 		<class>minimarketdemo.model.core.entities.AutProducto</class>
 		<class>minimarketdemo.model.core.entities.AutSolicitud</class>
+		<class>minimarketdemo.model.core.entities.MacAbastecimiento</class>
 		<class>minimarketdemo.model.core.entities.MacCliente</class>
+		<class>minimarketdemo.model.core.entities.MacDetalleFactura</class>
 		<class>minimarketdemo.model.core.entities.MacFabricacion</class>
+		<class>minimarketdemo.model.core.entities.MacFabricacionMaterial</class>
 		<class>minimarketdemo.model.core.entities.MacFactura</class>
 		<class>minimarketdemo.model.core.entities.MacGuiaEnvio</class>
+		<class>minimarketdemo.model.core.entities.MacMaterial</class>
 		<class>minimarketdemo.model.core.entities.MacOpcPago</class>
+		<class>minimarketdemo.model.core.entities.MacOrdenProduccion</class>
+		<class>minimarketdemo.model.core.entities.MacPeticione</class>
 		<class>minimarketdemo.model.core.entities.MacProducto</class>
 	</persistence-unit>
 </persistence>

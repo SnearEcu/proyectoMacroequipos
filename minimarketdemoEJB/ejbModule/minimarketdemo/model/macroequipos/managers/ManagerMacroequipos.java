@@ -60,7 +60,7 @@ public class ManagerMacroequipos {
 
 	public void actualizarStockAumentar(LoginDTO loginDTO, MacMaterial edicionMaterial) throws Exception {
 		MacMaterial modulo = (MacMaterial) mDAO.findById(MacMaterial.class, edicionMaterial.getMatId());
-		int stock = modulo.getStock() + edicionMaterial.getStock();
+		Double stock = modulo.getStock() + edicionMaterial.getStock();
 		modulo.setStock(stock);
 		mDAO.actualizar(modulo);
 		mAuditoria.mostrarLog(loginDTO, getClass(), "sumar stock",
@@ -70,7 +70,7 @@ public class ManagerMacroequipos {
 	}
 
 	public void actualizarStockDisminuir(LoginDTO loginDTO, MacMaterial edicionMaterial) throws Exception {
-		int stock = 0;
+		Double stock = 0.0;
 		MacMaterial modulo = (MacMaterial) mDAO.findById(MacMaterial.class, edicionMaterial.getMatId());
 		if (modulo.getStock() > 0) {
 			if (modulo.getStock() > edicionMaterial.getStock()) {
