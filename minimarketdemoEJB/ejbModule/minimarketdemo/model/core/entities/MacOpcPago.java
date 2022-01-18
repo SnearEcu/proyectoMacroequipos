@@ -24,7 +24,7 @@ public class MacOpcPago implements Serializable {
 	private String tipo;
 
 	//bi-directional many-to-one association to MacFactura
-	@OneToMany(mappedBy="macOpcPago")
+	@OneToMany(mappedBy="macOpcPago", fetch=FetchType.EAGER)
 	private List<MacFactura> macFacturas;
 
 	public MacOpcPago() {

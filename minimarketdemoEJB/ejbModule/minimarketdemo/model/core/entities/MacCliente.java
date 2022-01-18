@@ -42,7 +42,7 @@ public class MacCliente implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to MacFactura
-	@OneToMany(mappedBy="macCliente")
+	@OneToMany(mappedBy="macCliente", fetch=FetchType.EAGER)
 	private List<MacFactura> macFacturas;
 
 	public MacCliente() {

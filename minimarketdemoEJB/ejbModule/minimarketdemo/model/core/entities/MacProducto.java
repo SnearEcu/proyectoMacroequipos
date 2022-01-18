@@ -32,15 +32,19 @@ public class MacProducto implements Serializable {
 	@Column(nullable=false, length=2147483647)
 	private String nombre;
 
-	@Column(nullable=false, length=2147483647)
-	private String precioventa;
+	@Column(nullable=false)
+	private double precioventa;
 
 	@Column(nullable=false)
 	private Integer stock;
 
-	//bi-directional many-to-one association to MacFabricacion
-	@OneToMany(mappedBy="macProducto")
-	private List<MacFabricacion> macFabricacions;
+	//bi-directional many-to-one association to MacAbastecimiento
+	@OneToMany(mappedBy="macProducto", fetch=FetchType.EAGER)
+	private List<MacAbastecimiento> macAbastecimientos;
+
+	//bi-directional many-to-one association to MacDetalleFactura
+	@OneToMany(mappedBy="macProducto", fetch=FetchType.EAGER)
+	private List<MacDetalleFactura> macDetalleFacturas;
 
 	public MacProducto() {
 	}
@@ -85,11 +89,11 @@ public class MacProducto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getPrecioventa() {
+	public double getPrecioventa() {
 		return this.precioventa;
 	}
 
-	public void setPrecioventa(String precioventa) {
+	public void setPrecioventa(double precioventa) {
 		this.precioventa = precioventa;
 	}
 
@@ -101,26 +105,48 @@ public class MacProducto implements Serializable {
 		this.stock = stock;
 	}
 
-	public List<MacFabricacion> getMacFabricacions() {
-		return this.macFabricacions;
+	public List<MacAbastecimiento> getMacAbastecimientos() {
+		return this.macAbastecimientos;
 	}
 
-	public void setMacFabricacions(List<MacFabricacion> macFabricacions) {
-		this.macFabricacions = macFabricacions;
+	public void setMacAbastecimientos(List<MacAbastecimiento> macAbastecimientos) {
+		this.macAbastecimientos = macAbastecimientos;
 	}
 
-	public MacFabricacion addMacFabricacion(MacFabricacion macFabricacion) {
-		getMacFabricacions().add(macFabricacion);
-		macFabricacion.setMacProducto(this);
+	public MacAbastecimiento addMacAbastecimiento(MacAbastecimiento macAbastecimiento) {
+		getMacAbastecimientos().add(macAbastecimiento);
+		macAbastecimiento.setMacProducto(this);
 
-		return macFabricacion;
+		return macAbastecimiento;
 	}
 
-	public MacFabricacion removeMacFabricacion(MacFabricacion macFabricacion) {
-		getMacFabricacions().remove(macFabricacion);
-		macFabricacion.setMacProducto(null);
+	public MacAbastecimiento removeMacAbastecimiento(MacAbastecimiento macAbastecimiento) {
+		getMacAbastecimientos().remove(macAbastecimiento);
+		macAbastecimiento.setMacProducto(null);
 
-		return macFabricacion;
+		return macAbastecimiento;
+	}
+
+	public List<MacDetalleFactura> getMacDetalleFacturas() {
+		return this.macDetalleFacturas;
+	}
+
+	public void setMacDetalleFacturas(List<MacDetalleFactura> macDetalleFacturas) {
+		this.macDetalleFacturas = macDetalleFacturas;
+	}
+
+	public MacDetalleFactura addMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().add(macDetalleFactura);
+		macDetalleFactura.setMacProducto(this);
+
+		return macDetalleFactura;
+	}
+
+	public MacDetalleFactura removeMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().remove(macDetalleFactura);
+		macDetalleFactura.setMacProducto(null);
+
+		return macDetalleFactura;
 	}
 
 }
