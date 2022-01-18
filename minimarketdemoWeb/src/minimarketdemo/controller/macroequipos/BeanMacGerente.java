@@ -17,6 +17,7 @@ import minimarketdemo.model.core.entities.AutProducto;
 import minimarketdemo.model.core.entities.AutSolicitud;
 import minimarketdemo.model.core.entities.MacMaterial;
 import minimarketdemo.model.core.entities.PryProyecto;
+import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.entities.UniProforma;
 import minimarketdemo.model.macroequipos.managers.ManagerMacroequipos;
 
@@ -49,31 +50,12 @@ public class BeanMacGerente implements Serializable {
 	}
 
 	public void actionListenerInsertarMaterial() {
-		System.out.println("1 " + redflag);
 		try {
-			System.out.println("2 " + redflag);
-			for (int i = 0; i < listaMateriales.size(); i++) {
-				System.out.println("3 " + redflag);
-				String nombre = listaMateriales.get(i).getNombre();
-				System.out.println("4 " + redflag);
-				if (nuevoMaterial.getNombre().equals(nombre)) {
-					System.out.println("5 " + nuevoMaterial.getNombre() + " " + nombre +i);
-					redflag = false;
-				}else {
-					redflag = true;
-					System.out.println("6 " + redflag);
-				}
-				System.out.println("7 " + redflag);
-			}
-			System.out.println("8 " + redflag);
-			if (redflag == true) {
-				mMacro.insertarMaterial(nuevoMaterial);
-				JSFUtil.crearMensajeINFO("Material creado");
-				listaMateriales = mMacro.findAllMacMaterials();
-				nuevoMaterial = mMacro.inicializarMaterial();
-				} else {
-					JSFUtil.crearMensajeWARN("Este material ya existe");
-				}
+			mMacro.insertarMaterial(nuevoMaterial);
+			JSFUtil.crearMensajeINFO("Material creado");
+			listaMateriales = mMacro.findAllMacMaterials();
+			nuevoMaterial = mMacro.inicializarMaterial();
+
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();
@@ -82,7 +64,7 @@ public class BeanMacGerente implements Serializable {
 
 	public void actionListenerActualizarStockAumentar() {
 		try {
-			mMacro.actualizarStockAumentar(beanSegLogin.getLoginDTO(),edicionMaterial);
+			mMacro.actualizarStockAumentar(beanSegLogin.getLoginDTO(), edicionMaterial);
 			listaMateriales = mMacro.findAllMacMaterials();
 			nuevoMaterial = mMacro.inicializarMaterial();
 		} catch (Exception e) {
@@ -90,9 +72,10 @@ public class BeanMacGerente implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
 	public void actionListenerActualizarStockDisminuir() {
 		try {
-			mMacro.actualizarStockDisminuir(beanSegLogin.getLoginDTO(),edicionMaterial);
+			mMacro.actualizarStockDisminuir(beanSegLogin.getLoginDTO(), edicionMaterial);
 			listaMateriales = mMacro.findAllMacMaterials();
 			nuevoMaterial = mMacro.inicializarMaterial();
 		} catch (Exception e) {
@@ -103,6 +86,11 @@ public class BeanMacGerente implements Serializable {
 
 	public void actionListenerSeleccionarMaterial() throws Exception {
 		edicionMaterial = mMacro.findByIdMacMaterials(idseleccionado);
+	}
+
+	public String actionSeleccionarEdicionMaterial(MacMaterial seleccionado) {
+		edicionMaterial = seleccionado;
+		return "materiales_edit";
 	}
 
 //	public String actionPedido() {

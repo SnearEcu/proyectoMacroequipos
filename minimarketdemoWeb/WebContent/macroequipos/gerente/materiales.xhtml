@@ -67,7 +67,7 @@
 						<f:selectItems value="#{beanMacGerente.listaMateriales}" var="u"
 							itemLabel="#{u.nombre}" itemValue="#{u.matId}"></f:selectItems>
 						<p:ajax update="formTabla"
-							listener="#{beanMacGerente.actionListenerSeleccionarMaterial()}"></p:ajax>  -->
+							listener="#{beanMacGerente.actionListenerSeleccionarMaterial()}"></p:ajax>  
 					</p:selectOneMenu>
 					<h:outputText value="Cantidad" />
 					<p:spinner min="0" max="10000"
@@ -101,7 +101,8 @@
 				</p:column>
 				<p:column headerText="OPCIONES">
 					<p:commandButton title="Editar" icon="pi pi-pencil"
-						style="margin: 10px" />
+						style="margin: 10px" 
+						actionListener="#{beanMacGerente.actionSeleccionarEdicionMaterial(p)}"/>
 					<p:commandButton title="Eliminar" icon="pi pi-times" />
 
 				</p:column>
