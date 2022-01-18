@@ -9,7 +9,9 @@ import javax.ejb.Stateless;
 
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.auditoria.managers.ManagerAuditoria;
+import minimarketdemo.model.core.entities.MacCliente;
 import minimarketdemo.model.core.entities.MacMaterial;
+import minimarketdemo.model.core.entities.MacOrdenProduccion;
 import minimarketdemo.model.core.entities.MacProducto;
 import minimarketdemo.model.core.entities.PryProyecto;
 import minimarketdemo.model.core.entities.SegModulo;
@@ -118,30 +120,34 @@ public class ManagerMacroequipos {
 	}
 
 	// funciones de vendedor
+		
+	public List<MacCliente> findAllMacClientes() {
+		return mDAO.findAll(MacCliente.class);
+	}
+	public MacCliente inicializarCliente() {
+		MacCliente cliente = new MacCliente();
+		cliente.setApellido(null);
+		cliente.setCedula(null);
+		cliente.setCiudad(null);
+		cliente.setDireccion(null);
+		cliente.setEst(true);
+		cliente.setNombre(null);
+		cliente.setTelefono(null);
+		return cliente;
+	}
+	
+	
+	// funciones de operario
+	public List<MacOrdenProduccion> findAllMacOrdenProduccions() {
+		return mDAO.findAll(MacOrdenProduccion.class);
+	}
 
-	/*
-	 * //Funciones de vendedor
-	 * 
-	 * 
-	 * public List<MacMaterial> findPedidosByProforma(int idProforma){ return
-	 * mDAO.findWhere(UniPedido.class, "o.uniProforma.proId="+idProforma,
-	 * "o.uniId"); } public UniProforma inicializarProforma() { UniProforma proforma
-	 * = new UniProforma(); proforma.setProEstado("Negociación");
-	 * proforma.setProTotal(0); proforma.setProFechaentrega(ModelUtil.addDays(new
-	 * Date(), 30)); return proforma; } public UniPedido inicializarPedido() {
-	 * UniPedido pedido = new UniPedido(); pedido.setCantidad(0);
-	 * pedido.setTotal(0); return pedido; } public void insertarProforma
-	 * (UniProforma nuevaProforma) throws Exception { mDAO.insertar(nuevaProforma);
-	 * } public void insertarPedido(UniPedido nuevoPedido) throws Exception {
-	 * mDAO.insertar(nuevoPedido); }
-	 * 
-	 * public void actualizarEstado(UniProforma proforma) throws Exception {
-	 * mDAO.actualizar(proforma); }
-	 * 
-	 * public List<UniCliente> findAllClientes(){ return
-	 * mDAO.findAll(UniCliente.class); } public List<UniPrenda> findAllPrendas(){
-	 * return mDAO.findAll(UniPrenda.class); } public List<UniPedido>
-	 * findAllUniformes(){ return mDAO.findAll(UniPedido.class); } public
-	 * List<UniReclamo> findAllReclamos(){ return mDAO.findAll(UniReclamo.class); }
-	 */
+	public MacOrdenProduccion inicializarOrden() {
+		MacOrdenProduccion orden = new MacOrdenProduccion();
+		orden.setDescripcion(null);
+		orden.setEst("Espera");
+		orden.setFechafinal(null);
+		orden.setFechainicio(null);
+		return orden;
+	}
 }
