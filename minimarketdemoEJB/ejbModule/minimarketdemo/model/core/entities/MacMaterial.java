@@ -30,7 +30,7 @@ public class MacMaterial implements Serializable {
 	private String nombre;
 
 	@Column(nullable=false)
-	private Integer stock;
+	private double stock;
 
 	//bi-directional many-to-one association to MacFabricacionMaterial
 	@OneToMany(mappedBy="macMaterial")
@@ -71,11 +71,11 @@ public class MacMaterial implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Integer getStock() {
+	public double getStock() {
 		return this.stock;
 	}
 
-	public void setStock(Integer stock) {
+	public void setStock(double stock) {
 		this.stock = stock;
 	}
 

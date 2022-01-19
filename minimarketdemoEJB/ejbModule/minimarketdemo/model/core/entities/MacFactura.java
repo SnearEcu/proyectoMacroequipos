@@ -2,6 +2,7 @@ package minimarketdemo.model.core.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,6 +30,10 @@ public class MacFactura implements Serializable {
 	@Column(nullable=false, length=2147483647)
 	private String estado;
 
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
+	private Date fecha;
+
 	@Column(nullable=false)
 	private Integer total;
 
@@ -45,6 +50,10 @@ public class MacFactura implements Serializable {
 	//bi-directional many-to-one association to MacGuiaEnvio
 	@OneToMany(mappedBy="macFactura")
 	private List<MacGuiaEnvio> macGuiaEnvios;
+
+	//bi-directional many-to-one association to MacDetalleFactura
+	@OneToMany(mappedBy="macFactura")
+	private List<MacDetalleFactura> macDetalleFacturas;
 
 	public MacFactura() {
 	}
@@ -79,6 +88,14 @@ public class MacFactura implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public Integer getTotal() {
@@ -125,6 +142,28 @@ public class MacFactura implements Serializable {
 		macGuiaEnvio.setMacFactura(null);
 
 		return macGuiaEnvio;
+	}
+
+	public List<MacDetalleFactura> getMacDetalleFacturas() {
+		return this.macDetalleFacturas;
+	}
+
+	public void setMacDetalleFacturas(List<MacDetalleFactura> macDetalleFacturas) {
+		this.macDetalleFacturas = macDetalleFacturas;
+	}
+
+	public MacDetalleFactura addMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().add(macDetalleFactura);
+		macDetalleFactura.setMacFactura(this);
+
+		return macDetalleFactura;
+	}
+
+	public MacDetalleFactura removeMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().remove(macDetalleFactura);
+		macDetalleFactura.setMacFactura(null);
+
+		return macDetalleFactura;
 	}
 
 }
