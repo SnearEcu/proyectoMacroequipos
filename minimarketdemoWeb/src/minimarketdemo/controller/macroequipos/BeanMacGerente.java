@@ -11,14 +11,7 @@ import javax.inject.Named;
 
 import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.controller.seguridades.BeanSegLogin;
-import minimarketdemo.model.automovilesmanagers.ManagerAutomoviles;
-import minimarketdemo.model.core.entities.AutPedido;
-import minimarketdemo.model.core.entities.AutProducto;
-import minimarketdemo.model.core.entities.AutSolicitud;
 import minimarketdemo.model.core.entities.MacMaterial;
-import minimarketdemo.model.core.entities.PryProyecto;
-import minimarketdemo.model.core.entities.SegUsuario;
-import minimarketdemo.model.core.entities.UniProforma;
 import minimarketdemo.model.macroequipos.managers.ManagerMacroequipos;
 
 @Named
@@ -55,7 +48,6 @@ public class BeanMacGerente implements Serializable {
 			JSFUtil.crearMensajeINFO("Material creado");
 			listaMateriales = mMacro.findAllMacMaterials();
 			nuevoMaterial = mMacro.inicializarMaterial();
-
 		} catch (Exception e) {
 			JSFUtil.crearMensajeERROR(e.getMessage());
 			e.printStackTrace();

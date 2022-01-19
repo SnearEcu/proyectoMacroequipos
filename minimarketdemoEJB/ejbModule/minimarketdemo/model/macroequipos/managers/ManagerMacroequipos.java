@@ -1,21 +1,15 @@
 package minimarketdemo.model.macroequipos.managers;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import minimarketdemo.controller.JSFUtil;
 import minimarketdemo.model.auditoria.managers.ManagerAuditoria;
 import minimarketdemo.model.core.entities.MacMaterial;
 import minimarketdemo.model.core.entities.MacProducto;
-import minimarketdemo.model.core.entities.PryProyecto;
-import minimarketdemo.model.core.entities.SegModulo;
-import minimarketdemo.model.core.entities.SegUsuario;
 import minimarketdemo.model.core.managers.ManagerDAO;
-import minimarketdemo.model.core.utils.ModelUtil;
 import minimarketdemo.model.seguridades.dtos.LoginDTO;
 
 @Stateless
@@ -27,10 +21,12 @@ public class ManagerMacroequipos {
 	private ManagerAuditoria mAuditoria;
 
 	// Funciones gerente - Materials
+	@SuppressWarnings("unchecked")
 	public List<MacMaterial> findAllMacMaterials() {
 		return mDAO.findAll(MacMaterial.class);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<MacProducto> findAllMacProductos() {
 		return mDAO.findAll(MacProducto.class);
 	}
@@ -59,21 +55,21 @@ public class ManagerMacroequipos {
 	}
 
 	public void actualizarStockAumentar(LoginDTO loginDTO, MacMaterial edicionMaterial) throws Exception {
-		MacMaterial modulo = (MacMaterial) mDAO.findById(MacMaterial.class, edicionMaterial.getMatId());
-		Double stock = modulo.getStock() + edicionMaterial.getStock();
-		modulo.setStock(stock);
-		mDAO.actualizar(modulo);
-		mAuditoria.mostrarLog(loginDTO, getClass(), "sumar stock",
-				"se aumentó el material " + edicionMaterial.getMatId());
-		throw new Exception("Se aumento el stock ");
-
+		
+			MacMaterial modulo = (MacMaterial) mDAO.findById(MacMaterial.class, edicionMaterial.getMatId());
+			Double stock = modulo.getStock() + edicionMaterial.getStock();
+			modulo.setStock(stock);
+			mDAO.actualizar(modulo);
+			mAuditoria.mostrarLog(loginDTO, getClass(), "sumar stock",
+					"se aumentó el material " + edicionMaterial.getMatId());
+			throw new Exception("Se aumento el stock ");
 	}
 
 	public void actualizarStockDisminuir(LoginDTO loginDTO, MacMaterial edicionMaterial) throws Exception {
 		Double stock = 0.0;
 		MacMaterial modulo = (MacMaterial) mDAO.findById(MacMaterial.class, edicionMaterial.getMatId());
 		if (modulo.getStock() > 0) {
-			if (modulo.getStock() > edicionMaterial.getStock()) {
+			if (modulo.getStock() >= edicionMaterial.getStock()) {
 				stock = modulo.getStock() - edicionMaterial.getStock();
 				System.out.println(stock);
 				modulo.setStock(stock);
@@ -87,20 +83,8 @@ public class ManagerMacroequipos {
 		} else {
 			throw new Exception("No existe stock para reducir ");
 		}
-
 	}
 
-	public void actualizarUsuario(LoginDTO loginDTO, SegUsuario edicionUsuario) throws Exception {
-		SegUsuario usuario = (SegUsuario) mDAO.findById(SegUsuario.class, edicionUsuario.getIdSegUsuario());
-		usuario.setApellidos(edicionUsuario.getApellidos());
-		usuario.setClave(edicionUsuario.getClave());
-		usuario.setCorreo(edicionUsuario.getCorreo());
-		usuario.setCodigo(edicionUsuario.getCodigo());
-		usuario.setNombres(edicionUsuario.getNombres());
-		mDAO.actualizar(usuario);
-		mAuditoria.mostrarLog(loginDTO, getClass(), "actualizarUsuario",
-				"se actualizó al usuario " + usuario.getApellidos());
-	}
 
 	/*
 	 * public List<MacMaterial> findMaterialById(int idMaterial){ return
@@ -109,7 +93,7 @@ public class ManagerMacroequipos {
 	 */
 
 	public void insertarMaterial(MacMaterial nuevoMaterial) throws Exception {
-
+		System.out.print("123");
 		mDAO.insertar(nuevoMaterial);
 	}
 

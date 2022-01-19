@@ -3,6 +3,9 @@
 	<name>minimarketdemoEJB</name>
 	<comment></comment>
 	<projects>
+		<project>minimarketdemo</project>
+		<project>minimarketdemoWeb</project>
+		<project>proyectoMacroequipos</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
