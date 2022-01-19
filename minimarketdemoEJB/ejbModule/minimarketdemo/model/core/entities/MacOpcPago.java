@@ -16,11 +16,9 @@ public class MacOpcPago implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="opc_pago_id", unique=true, nullable=false)
+	@Column(name="opc_pago_id")
 	private Integer opcPagoId;
 
-	@Column(nullable=false, length=2147483647)
 	private String tipo;
 
 	//bi-directional many-to-one association to MacFactura

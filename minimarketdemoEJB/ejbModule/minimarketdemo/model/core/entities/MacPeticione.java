@@ -15,18 +15,17 @@ public class MacPeticione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pet_id", unique=true, nullable=false)
+	@Column(name="pet_id")
 	private Integer petId;
 
 	//bi-directional many-to-one association to MacDetalleFactura
 	@ManyToOne
-	@JoinColumn(name="det_fac_id", nullable=false)
+	@JoinColumn(name="det_fac_id")
 	private MacDetalleFactura macDetalleFactura;
 
 	//bi-directional many-to-one association to MacOrdenProduccion
 	@ManyToOne
-	@JoinColumn(name="ord_id", nullable=false)
+	@JoinColumn(name="ord_id")
 	private MacOrdenProduccion macOrdenProduccion;
 
 	public MacPeticione() {

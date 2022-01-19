@@ -17,9 +17,10 @@
 		<p:menubar>
 			<p:menuitem value="Regresar" icon="pi pi-home"
 				action="/menu?faces-redirect=true" />
-			<p:menuitem value="Proformas" icon="pi pi-dollar"
-			action="#{beanAutVendedor.actionPedido()}"/>
-			<p:menuitem value="Productos" icon="pi pi-tags"/>
+			<p:menuitem value="Productos" icon="pi pi-dollar"
+			action="productos"/>
+			<p:menuitem value="Materiales" icon="pi pi-dollar"
+			action="materiales"/>
 			<f:facet name="options">
 				<p:menuButton value="#{beanSegLogin.loginDTO.correo}"
 					icon="pi pi-user">

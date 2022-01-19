@@ -16,26 +16,19 @@ public class MacProducto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pro_id", unique=true, nullable=false)
+	@Column(name="pro_id")
 	private Integer proId;
 
-	@Column(nullable=false, length=2147483647)
 	private String descripcion;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String estado;
 
-	@Column(nullable=false, length=2147483647)
 	private String nombre;
 
-	@Column(nullable=false)
 	private double precioventa;
 
-	@Column(nullable=false)
 	private Integer stock;
 
 	//bi-directional many-to-one association to MacAbastecimiento

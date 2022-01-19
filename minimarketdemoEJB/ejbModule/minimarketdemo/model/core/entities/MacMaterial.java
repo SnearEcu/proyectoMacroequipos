@@ -16,20 +16,15 @@ public class MacMaterial implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="mat_id", unique=true, nullable=false)
+	@Column(name="mat_id")
 	private Integer matId;
 
-	@Column(length=2147483647)
 	private String descripcion;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String nombre;
 
-	@Column(nullable=false)
 	private double stock;
 
 	//bi-directional many-to-one association to MacFabricacionMaterial

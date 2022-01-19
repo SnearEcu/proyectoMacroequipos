@@ -17,43 +17,37 @@ public class MacFactura implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="fac_id", unique=true, nullable=false)
+	@Column(name="fac_id")
 	private Integer facId;
 
-	@Column(nullable=false)
 	private double anticipo;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String estado;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
 	private Date fecha;
 
-	@Column(nullable=false)
 	private Integer total;
+
+	//bi-directional many-to-one association to MacDetalleFactura
+	@OneToMany(mappedBy="macFactura")
+	private List<MacDetalleFactura> macDetalleFacturas;
 
 	//bi-directional many-to-one association to MacCliente
 	@ManyToOne
-	@JoinColumn(name="cli_id", nullable=false)
+	@JoinColumn(name="cli_id")
 	private MacCliente macCliente;
 
 	//bi-directional many-to-one association to MacOpcPago
 	@ManyToOne
-	@JoinColumn(name="opc_pago_id", nullable=false)
+	@JoinColumn(name="opc_pago_id")
 	private MacOpcPago macOpcPago;
 
 	//bi-directional many-to-one association to MacGuiaEnvio
 	@OneToMany(mappedBy="macFactura")
 	private List<MacGuiaEnvio> macGuiaEnvios;
-
-	//bi-directional many-to-one association to MacDetalleFactura
-	@OneToMany(mappedBy="macFactura")
-	private List<MacDetalleFactura> macDetalleFacturas;
 
 	public MacFactura() {
 	}
@@ -106,6 +100,28 @@ public class MacFactura implements Serializable {
 		this.total = total;
 	}
 
+	public List<MacDetalleFactura> getMacDetalleFacturas() {
+		return this.macDetalleFacturas;
+	}
+
+	public void setMacDetalleFacturas(List<MacDetalleFactura> macDetalleFacturas) {
+		this.macDetalleFacturas = macDetalleFacturas;
+	}
+
+	public MacDetalleFactura addMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().add(macDetalleFactura);
+		macDetalleFactura.setMacFactura(this);
+
+		return macDetalleFactura;
+	}
+
+	public MacDetalleFactura removeMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
+		getMacDetalleFacturas().remove(macDetalleFactura);
+		macDetalleFactura.setMacFactura(null);
+
+		return macDetalleFactura;
+	}
+
 	public MacCliente getMacCliente() {
 		return this.macCliente;
 	}
@@ -142,28 +158,6 @@ public class MacFactura implements Serializable {
 		macGuiaEnvio.setMacFactura(null);
 
 		return macGuiaEnvio;
-	}
-
-	public List<MacDetalleFactura> getMacDetalleFacturas() {
-		return this.macDetalleFacturas;
-	}
-
-	public void setMacDetalleFacturas(List<MacDetalleFactura> macDetalleFacturas) {
-		this.macDetalleFacturas = macDetalleFacturas;
-	}
-
-	public MacDetalleFactura addMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
-		getMacDetalleFacturas().add(macDetalleFactura);
-		macDetalleFactura.setMacFactura(this);
-
-		return macDetalleFactura;
-	}
-
-	public MacDetalleFactura removeMacDetalleFactura(MacDetalleFactura macDetalleFactura) {
-		getMacDetalleFacturas().remove(macDetalleFactura);
-		macDetalleFactura.setMacFactura(null);
-
-		return macDetalleFactura;
 	}
 
 }

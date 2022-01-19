@@ -15,24 +15,21 @@ public class MacAbastecimiento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="aba_id", unique=true, nullable=false)
+	@Column(name="aba_id")
 	private Integer abaId;
 
-	@Column(nullable=false)
 	private Integer cantidad;
 
-	@Column(nullable=false)
 	private Boolean est;
 
 	//bi-directional many-to-one association to MacOrdenProduccion
 	@ManyToOne
-	@JoinColumn(name="ord_id", nullable=false)
+	@JoinColumn(name="ord_id")
 	private MacOrdenProduccion macOrdenProduccion;
 
 	//bi-directional many-to-one association to MacProducto
 	@ManyToOne
-	@JoinColumn(name="pro_id", nullable=false)
+	@JoinColumn(name="pro_id")
 	private MacProducto macProducto;
 
 	public MacAbastecimiento() {

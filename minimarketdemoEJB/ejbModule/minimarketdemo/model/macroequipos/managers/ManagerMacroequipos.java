@@ -1,5 +1,7 @@
 package minimarketdemo.model.macroequipos.managers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +10,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import minimarketdemo.model.core.entities.MacMaterial;
+import minimarketdemo.model.core.entities.MacOrdenProduccion;
+import minimarketdemo.model.core.entities.PryProyecto;
+import minimarketdemo.model.core.entities.PryTarea;
 import minimarketdemo.model.core.managers.ManagerDAO;
 import minimarketdemo.model.core.utils.ModelUtil;
 
@@ -82,4 +87,29 @@ public class ManagerMacroequipos {
 	public List<UniReclamo> findAllReclamos(){
     	return mDAO.findAll(UniReclamo.class);
     }*/
+	
+	//----------------Produccion--------------
+	public List<MacOrdenProduccion> findAllMacOrdenProduccions(){
+    	return mDAO.findAll(MacOrdenProduccion.class);
+    }
+	
+	public MacOrdenProduccion inicializarMacOrdenProduccion(){
+		MacOrdenProduccion orden = new MacOrdenProduccion();
+		orden.setEst("Solicitada");
+		return orden;
+	}
+	public void insertarOrden(MacOrdenProduccion nuevaOrden) throws Exception {
+    	mDAO.insertar(nuevaOrden);
+    }
+    public void iniciarOrden(MacOrdenProduccion orden) throws Exception {
+    	orden.setEst("Estado");
+    	orden.setFechainicio(new Date());
+    	mDAO.actualizar(orden);
+    }
+    public void terminarOrden(MacOrdenProduccion orden) throws Exception {
+    	orden.setEst("Terminada");
+    	orden.setFechafinal(new Date());
+    	mDAO.actualizar(orden);
+    }
+	
 }

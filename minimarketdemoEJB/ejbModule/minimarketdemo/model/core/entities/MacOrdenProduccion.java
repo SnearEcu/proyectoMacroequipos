@@ -17,14 +17,11 @@ public class MacOrdenProduccion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ord_id", unique=true, nullable=false, length=2147483647)
+	@Column(name="ord_id")
 	private String ordId;
 
-	@Column(length=2147483647)
 	private String descripcion;
 
-	@Column(nullable=false, length=2147483647)
 	private String est;
 
 	@Temporal(TemporalType.DATE)
@@ -33,13 +30,13 @@ public class MacOrdenProduccion implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechainicio;
 
-	//bi-directional many-to-one association to MacFabricacion
-	@OneToMany(mappedBy="macOrdenProduccion")
-	private List<MacFabricacion> macFabricacions;
-
 	//bi-directional many-to-one association to MacAbastecimiento
 	@OneToMany(mappedBy="macOrdenProduccion")
 	private List<MacAbastecimiento> macAbastecimientos;
+
+	//bi-directional many-to-one association to MacFabricacion
+	@OneToMany(mappedBy="macOrdenProduccion")
+	private List<MacFabricacion> macFabricacions;
 
 	//bi-directional many-to-one association to MacPeticione
 	@OneToMany(mappedBy="macOrdenProduccion")
@@ -88,28 +85,6 @@ public class MacOrdenProduccion implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
-	public List<MacFabricacion> getMacFabricacions() {
-		return this.macFabricacions;
-	}
-
-	public void setMacFabricacions(List<MacFabricacion> macFabricacions) {
-		this.macFabricacions = macFabricacions;
-	}
-
-	public MacFabricacion addMacFabricacion(MacFabricacion macFabricacion) {
-		getMacFabricacions().add(macFabricacion);
-		macFabricacion.setMacOrdenProduccion(this);
-
-		return macFabricacion;
-	}
-
-	public MacFabricacion removeMacFabricacion(MacFabricacion macFabricacion) {
-		getMacFabricacions().remove(macFabricacion);
-		macFabricacion.setMacOrdenProduccion(null);
-
-		return macFabricacion;
-	}
-
 	public List<MacAbastecimiento> getMacAbastecimientos() {
 		return this.macAbastecimientos;
 	}
@@ -130,6 +105,28 @@ public class MacOrdenProduccion implements Serializable {
 		macAbastecimiento.setMacOrdenProduccion(null);
 
 		return macAbastecimiento;
+	}
+
+	public List<MacFabricacion> getMacFabricacions() {
+		return this.macFabricacions;
+	}
+
+	public void setMacFabricacions(List<MacFabricacion> macFabricacions) {
+		this.macFabricacions = macFabricacions;
+	}
+
+	public MacFabricacion addMacFabricacion(MacFabricacion macFabricacion) {
+		getMacFabricacions().add(macFabricacion);
+		macFabricacion.setMacOrdenProduccion(this);
+
+		return macFabricacion;
+	}
+
+	public MacFabricacion removeMacFabricacion(MacFabricacion macFabricacion) {
+		getMacFabricacions().remove(macFabricacion);
+		macFabricacion.setMacOrdenProduccion(null);
+
+		return macFabricacion;
 	}
 
 	public List<MacPeticione> getMacPeticiones() {

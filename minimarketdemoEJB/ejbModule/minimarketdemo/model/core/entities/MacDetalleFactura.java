@@ -16,24 +16,21 @@ public class MacDetalleFactura implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="det_fac_id", unique=true, nullable=false)
+	@Column(name="det_fac_id")
 	private Integer detFacId;
 
-	@Column(nullable=false)
 	private Integer cantidad;
 
-	@Column(nullable=false)
 	private Boolean est;
 
 	//bi-directional many-to-one association to MacFactura
 	@ManyToOne
-	@JoinColumn(name="fac_id", nullable=false)
+	@JoinColumn(name="fac_id")
 	private MacFactura macFactura;
 
 	//bi-directional many-to-one association to MacProducto
 	@ManyToOne
-	@JoinColumn(name="pro_id", nullable=false)
+	@JoinColumn(name="pro_id")
 	private MacProducto macProducto;
 
 	//bi-directional many-to-one association to MacPeticione

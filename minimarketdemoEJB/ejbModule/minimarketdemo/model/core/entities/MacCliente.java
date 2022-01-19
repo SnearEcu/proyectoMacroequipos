@@ -16,29 +16,21 @@ public class MacCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="cli_id", unique=true, nullable=false)
+	@Column(name="cli_id")
 	private Integer cliId;
 
-	@Column(nullable=false, length=2147483647)
 	private String apellido;
 
-	@Column(nullable=false, length=2147483647)
 	private String cedula;
 
-	@Column(nullable=false, length=2147483647)
 	private String ciudad;
 
-	@Column(nullable=false, length=2147483647)
 	private String direccion;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String nombre;
 
-	@Column(nullable=false, length=2147483647)
 	private String telefono;
 
 	//bi-directional many-to-one association to MacFactura

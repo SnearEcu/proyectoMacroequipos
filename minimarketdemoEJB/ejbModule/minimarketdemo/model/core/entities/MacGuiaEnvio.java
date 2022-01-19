@@ -15,31 +15,25 @@ public class MacGuiaEnvio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="gui_id", unique=true, nullable=false)
+	@Column(name="gui_id")
 	private Integer guiId;
 
-	@Column(nullable=false, length=2147483647)
 	private String descripcion;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String estado;
 
-	@Column(nullable=false, length=2147483647)
 	private String fechaentrega;
 
-	@Column(nullable=false, length=2147483647)
 	private String fechasalida;
 
-	@Column(name="gui_destino", nullable=false, length=2147483647)
+	@Column(name="gui_destino")
 	private String guiDestino;
 
 	//bi-directional many-to-one association to MacFactura
 	@ManyToOne
-	@JoinColumn(name="fac_id", nullable=false)
+	@JoinColumn(name="fac_id")
 	private MacFactura macFactura;
 
 	public MacGuiaEnvio() {

@@ -16,22 +16,18 @@ public class MacFabricacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="fab_id", unique=true, nullable=false)
+	@Column(name="fab_id")
 	private Integer fabId;
 
-	@Column(nullable=false)
 	private Boolean calidad;
 
-	@Column(nullable=false)
 	private Boolean est;
 
-	@Column(nullable=false, length=2147483647)
 	private String estado;
 
 	//bi-directional many-to-one association to MacOrdenProduccion
 	@ManyToOne
-	@JoinColumn(name="ord_id", nullable=false)
+	@JoinColumn(name="ord_id")
 	private MacOrdenProduccion macOrdenProduccion;
 
 	//bi-directional many-to-one association to MacFabricacionMaterial
